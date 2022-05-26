@@ -94,6 +94,14 @@
   box-sizing: border-box;
 }
 
+.HeaderContainer {
+    display: grid;
+    grid-template-columns: 300px auto 200px;
+    background-color: #1178CE;
+    height: 120px;
+    box-sizing: border-box;
+  }
+
 @media (min-width: 540px) {
   .SectionTitle {
     font-size: 24px;
