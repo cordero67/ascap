@@ -25,6 +25,12 @@ const Subscription = (props) => {
         borderLeft: "1px solid lightblue",
         borderRight: "1px solid lightblue",
       };
+    } else if ("error" === props.activeCard) {
+      return {
+        borderTop: "1px solid red",
+        borderLeft: "1px solid red",
+        borderRight: "1px solid red",
+      };
     } else return null;
   };
 
@@ -36,6 +42,10 @@ const Subscription = (props) => {
     } else if (status === props.hoveredCard) {
       return {
         border: "1px solid lightblue",
+      };
+    } else if ("error" === props.activeCard) {
+      return {
+        border: "1px solid red",
       };
     } else return null;
   };

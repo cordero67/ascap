@@ -7,6 +7,7 @@ import classes from "./App.module.css";
 const App = () => {
   const [activeCard, setActiveCard] = useState("");
   const [hoveredCard, setHoveredCard] = useState("");
+  const [companyType, setCompanyType] = useState("");
 
   const subscriptions = [
     {
@@ -60,15 +61,42 @@ const App = () => {
   ];
 
   const companyTypes = [
-    "Individual / Sole porprietor or Single-member LLC",
-    "C Corporation",
-    "S Corporation",
-    "LLC - C Corporation",
-    "LLC - S Corporation",
-    "LLC - Partnership",
-    "Partnership",
-    "Trust / Estate",
-    "OTHER",
+    {
+      value: "individual",
+      text: "Individual / Sole porprietor or Single-member LLC",
+    },
+    {
+      value: "cCorp",
+      text: "C Corporation",
+    },
+    {
+      value: "sCorp",
+      text: "S Corporation",
+    },
+    {
+      value: "llcCCorp",
+      text: "LLC - C Corporation",
+    },
+    {
+      value: "llcSCorp",
+      text: "LLC - S Corporation",
+    },
+    {
+      value: "llcPartnership",
+      text: "LLC - Partnership",
+    },
+    {
+      value: "partnership",
+      text: "Partnership",
+    },
+    {
+      value: "trustEstate",
+      text: "Trust / Estate",
+    },
+    {
+      value: "other",
+      text: "OTHER",
+    },
   ];
 
   return (
@@ -98,6 +126,11 @@ const App = () => {
             );
           })}
         </div>
+        {activeCard === "error" ? (
+          <div className={classes.ErrorText}>
+            Please select your membership type.
+          </div>
+        ) : null}
         <div
           style={{
             fontSize: "14px",
@@ -151,13 +184,28 @@ const App = () => {
                   height: "40px",
                   boxSizing: "border-box",
                 }}
-                //onChange={props.onChange}
+                onChange={(event) => {
+                  console.log("changing");
+                  setCompanyType(event.target.value);
+                  console.log("target value: ", event.target.value);
+                }}
               >
+                <option value="none" selected disabled hidden>
+                  Select an Option
+                </option>
                 {companyTypes.map((opt, index) => (
-                  <option key={index}>{opt}</option>
+                  <option key={index} value={opt.value}>
+                    {opt.text}
+                  </option>
                 ))}
               </select>
             </div>
+            {companyType === "" &&
+            (activeCard === "both" || activeCard === "producer") ? (
+              <div style={{ color: "red" }}>
+                Please select your publisher company type.
+              </div>
+            ) : null}
           </div>
         ) : null}
 
@@ -192,31 +240,37 @@ const App = () => {
           </a>
           .
         </div>
-      </div>
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "190px 190px",
-          paddingTop: "20px",
-          paddingLeft: "20px",
-          boxSizing: "border-box",
-        }}
-      >
-        <div style={{ paddingRight: "10px" }}>
-          <button style={{ width: "180px", height: "40px" }}>CANCEL</button>
-        </div>
-        <button
+        <div
           style={{
-            width: "180px",
-            height: "40px",
-            color: "#fff",
-            backgroundColor: "#1178CE",
-            padding: "10px 20px 9px",
+            display: "grid",
+            gridTemplateColumns: "190px 190px",
+            paddingTop: "20px",
+            paddingLeft: "20px",
+            boxSizing: "border-box",
           }}
-          onClick={() => console.log("clicked")}
         >
-          CONTINUE
-        </button>
+          <div style={{ paddingRight: "10px" }}>
+            <button style={{ width: "180px", height: "40px" }}>CANCEL</button>
+          </div>
+          <button
+            style={{
+              width: "180px",
+              height: "40px",
+              color: "#fff",
+              backgroundColor: "#1178CE",
+              padding: "10px 20px 9px",
+            }}
+            onClick={() => {
+              console.log("clicked");
+              if (activeCard === "") {
+                console.log("about to change");
+                setActiveCard("error");
+              }
+            }}
+          >
+            CONTINUE
+          </button>
+        </div>
       </div>
     </Fragment>
   );

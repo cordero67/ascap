@@ -20,43 +20,55 @@ const Header = () => {
   };
 
   return (
-    <div className={classes.HeaderContainer}>
-      <div style={{ margin: "40px" }}>
-        <ion-icon
-          style={{
-            width: "40px",
-            fontSize: "40px",
-            color: "lightblue",
-          }}
-          name="musical-note-outline"
-        ></ion-icon>
-
-        {screenSize > 770 ? (
-          <span
+    <div className={classes.Header}>
+      <div className={classes.HeaderLeft}>
+        <a
+          style={{ textDecoration: "none", color: "#1178CE" }}
+          href="https://www.ascap.com/"
+        >
+          <ion-icon
             style={{
-              fontSize: "45px",
-              fontWeight: "600",
-              color: "#fff",
-              paddingBottom: "20px",
+              width: "40px",
+              fontSize: "40px",
+              color: "lightblue",
             }}
-          >
-            ascap
-          </span>
-        ) : null}
+            name="musical-note-outline"
+          ></ion-icon>
+
+          {screenSize > 870 ? (
+            <span
+              style={{
+                fontSize: "45px",
+                fontWeight: "600",
+                color: "#fff",
+                paddingBottom: "20px",
+              }}
+            >
+              ascap
+            </span>
+          ) : null}
+        </a>
       </div>
-      <div className={classes.HeaderTitle}>Membership Application</div>
-      <div style={{ textAlign: "center", margin: "50px 0px" }}>
-        {screenSize > 770 ? (
+      <div className={classes.HeaderMiddle}>Membership Application</div>
+      <div className={classes.HeaderRight}>
+        {screenSize > 870 ? (
           <button
+            className={classes.HeaderButton}
             onClick={() => {
               openHelpCenter();
             }}
-            className={classes.HeaderButton}
           >
             LOOKING FOR HELP?
           </button>
         ) : (
-          <ion-icon name="help-circle-outline"></ion-icon>
+          <button
+            className={classes.HeaderQuestion}
+            onClick={() => {
+              openHelpCenter();
+            }}
+          >
+            ?
+          </button>
         )}
       </div>
     </div>
@@ -64,3 +76,9 @@ const Header = () => {
 };
 
 export default Header;
+/*
+
+      <div className={classes.HeaderMiddle}>Membership Application</div>
+
+
+      */
