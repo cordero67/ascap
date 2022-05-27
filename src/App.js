@@ -74,7 +74,6 @@ const App = () => {
   return (
     <Fragment>
       <Header />
-
       <div className={classes.MainContainer}>
         <div className={classes.SectionTitle}>Membership</div>
         <div className={classes.SectionDescription}>
@@ -194,7 +193,6 @@ const App = () => {
           .
         </div>
       </div>
-
       <div
         style={{
           display: "grid",
@@ -215,6 +213,7 @@ const App = () => {
             backgroundColor: "#1178CE",
             padding: "10px 20px 9px",
           }}
+          onClick={() => console.log("clicked")}
         >
           CONTINUE
         </button>

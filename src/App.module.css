@@ -95,14 +95,44 @@
 }
 
 .HeaderContainer {
-    display: grid;
-    grid-template-columns: 300px auto 200px;
-    background-color: #1178CE;
-    height: 120px;
-    box-sizing: border-box;
-  }
+  display: grid;
+  grid-template-columns: 100px auto 280px;
+  background-color: #1178CE;
+  height: 70px;
+  box-sizing: border-box;
+}
+
+.HeaderTitle {
+  margin: 10px 0px;
+  font-size: 20px;
+  font-weight: 700;
+  text-align: center;
+  color: #fff;
+}
+
+.HeaderButton {
+  border: 2px solid #fff;
+  width: 210px;
+  height: 40px;
+  font-size: 16px;
+  font-weight: 600;
+  background-color: #1178CE;
+  color: #fff;
+}
+
+.HeaderButton:hover {
+  background-color: #fff;
+  color: #1178CE;
+}
 
 @media (min-width: 540px) {
+  .HeaderTitle {
+    margin: 10px 0px;
+    font-size: 40px;
+    font-weight: 700;
+    text-align: center;
+    color: #fff;
+  }
   .SectionTitle {
     font-size: 24px;
     margin-bottom: 8px;
@@ -135,6 +165,12 @@
 }
 
 @media (min-width: 770px) {
+  .HeaderContainer {
+    display: grid;
+    grid-template-columns: 240px auto 280px;
+    height: 140px;
+  }
+
   .MainContainer {
     padding-left: calc((100vw - 660px)/2);
     padding-right: calc((100vw - 660px)/2);
@@ -146,6 +182,11 @@
 }
 
 @media (min-width: 992px) {
+  .HeaderTitle {
+    margin: 40px 0px;
+    font-size: 40px;
+  }
+
   .MainContainer {
     padding-left: calc((100vw - 900px)/2);
     padding-right: calc((100vw - 900px)/2);
