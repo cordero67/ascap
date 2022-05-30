@@ -1,0 +1,93 @@
+.Header {
+  display: grid;
+  grid-template-columns: 90px auto 90px;
+  background-image: linear-gradient(to right, #0C5997 , #1285E2);
+  height: 70px;
+  box-sizing: border-box;
+}
+
+.HeaderLeft {
+  margin: 10px 30px;
+  box-sizing: border-box;
+}
+
+.HeaderMiddle {
+  height: 50px;
+  margin: 8px 0px;
+  font-size: 20px;
+  font-weight: 700;
+  text-align: center;
+  color: #fff;
+  box-sizing: border-box;
+}
+
+.HeaderRight {
+  text-align: center;
+  margin: 15px 0px 10px;
+  box-sizing: border-box;
+}
+
+.HeaderButton {
+  border: 2px solid #fff;
+  width: 210px;
+  height: 40px;
+  font-size: 16px;
+  font-weight: 600;
+  background-color: #1178CE;
+  color: #fff;
+}
+
+.HeaderButton:hover {
+  background-color: #fff;
+  color: #1178CE;
+}
+
+.HeaderQuestion {
+  border: 2px solid #fff;
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+  font-weight: 600;
+  border-radius: 50%;
+  background-color: #1178CE;
+  color: #fff;
+}
+
+.HeaderQuestion:hover {
+  border: 2px solid #1178CE;
+  background-color: #fff;
+  color: #1178CE;
+}
+
+@media (min-width: 435px) {
+  .HeaderMiddle {
+    margin: 20px 0px;
+  }
+}
+
+@media (min-width: 575px) {
+  .HeaderMiddle {
+    margin-top: 15px;
+    font-size: 28px;
+  }
+}
+
+@media (min-width: 870px) {
+  .Header {
+    display: grid;
+    grid-template-columns: 240px auto 280px;
+    height: 140px;
+  }
+
+  .HeaderLeft {
+    margin: 35px;
+  }
+
+  .HeaderMiddle {
+    margin-top: 50px;
+  }
+
+  .HeaderRight {
+    margin: 50px 0px;
+  }
+}

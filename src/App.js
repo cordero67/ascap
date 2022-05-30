@@ -1,13 +1,27 @@
 import React, { useState, Fragment } from "react";
 
-import Header from "./Header";
-import Subscription from "./Subscription";
+import Header from "./Components/Header";
+import Subscription from "./Components/Subscription";
+import MinorAppModal from "./Components/MinorAppModal";
+import SuccessModal from "./Components/SuccessModal";
 import classes from "./App.module.css";
 
 const App = () => {
   const [activeCard, setActiveCard] = useState("");
   const [hoveredCard, setHoveredCard] = useState("");
-  const [companyType, setCompanyType] = useState("");
+  const [companyType, setCompanyType] = useState("none");
+  const [selectError, setSelectError] = useState(false);
+  const [showMinorAppModal, setShowMinorAppModal] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [screenSize, setScreenSize] = useState(window.innerWidth);
+
+  const stylingUpdate = (inWidth) => {
+    setScreenSize(inWidth);
+  };
+
+  window.onresize = function (event) {
+    stylingUpdate(window.innerWidth);
+  };
 
   const subscriptions = [
     {
@@ -99,177 +113,266 @@ const App = () => {
     },
   ];
 
-  return (
-    <Fragment>
-      <Header />
-      <div className={classes.MainContainer}>
-        <div className={classes.SectionTitle}>Membership</div>
-        <div className={classes.SectionDescription}>
-          Select your membership type below:
+  const membershipError = () => {
+    if (activeCard === "error") {
+      return (
+        <div className={classes.ErrorText}>
+          Please select your membership type.
         </div>
-        <div className={classes.SubscriptionContainer}>
-          {subscriptions.map((sub, index) => {
-            return (
-              <Subscription
-                subscription={sub}
-                activeCard={activeCard}
-                hoveredCard={hoveredCard}
-                clicked={(tr) => {
-                  console.log("clicked the button: ", tr);
-                  setActiveCard(tr);
-                }}
-                hovered={(tr) => {
-                  console.log("hover change: ", tr);
-                  setHoveredCard(tr);
-                }}
-              />
-            );
-          })}
-        </div>
-        {activeCard === "error" ? (
-          <div className={classes.ErrorText}>
-            Please select your membership type.
-          </div>
-        ) : null}
+      );
+    }
+  };
+
+  const underAge = (
+    <div className={classes.JoinASCAP}>
+      *If you are under 18 years of age please{" "}
+      <button
+        className={classes.BlueText}
+        onClick={() => setShowMinorAppModal(true)}
+      >
+        <span>read more about how to join ASCAP.</span>
+      </button>
+    </div>
+  );
+
+  const companyTypeSelection = () => {
+    if (activeCard === "both" || activeCard === "producer") {
+      return (
         <div
           style={{
-            fontSize: "14px",
-            paddingLeft: "20px",
-            paddingRight: "20px",
-            paddingBottom: "20px",
+            padding: "0px 20px 20px",
           }}
         >
-          *If you are under 18 years of age please{" "}
-          <span style={{ color: "#1178CE" }}>
-            read more about how to join ASCAP.
-          </span>
-        </div>
-        {activeCard === "both" || activeCard === "producer" ? (
           <div
             style={{
-              paddingLeft: "20px",
-              paddingRight: "20px",
-              paddingBottom: "20px",
+              fontSize: "20px",
+              fontWeight: "600",
+              marginBottom: "4px",
             }}
           >
-            <div
-              style={{
-                fontSize: "20px",
-                fontWeight: "600",
-                marginBottom: "4px",
-              }}
-            >
-              Publisher Company Type
-            </div>
-            <div
-              style={{
-                fontSize: "16px",
-                marginBottom: "16px",
-              }}
-            >
-              Please select the federal tax classification of your publisher
-              company.
-            </div>
-
-            <div>
-              <select
-                type="number"
-                name="ticketsSelected"
-                required
-                //value={props.name.ticketsSelected}
-                //className={styles.SelectionBox}
-                style={{
-                  fontSize: "20px",
-                  width: "600px",
-                  height: "40px",
-                  boxSizing: "border-box",
-                }}
-                onChange={(event) => {
-                  console.log("changing");
-                  setCompanyType(event.target.value);
-                  console.log("target value: ", event.target.value);
-                }}
-              >
-                <option value="none" selected disabled hidden>
-                  Select an Option
-                </option>
-                {companyTypes.map((opt, index) => (
-                  <option key={index} value={opt.value}>
-                    {opt.text}
-                  </option>
-                ))}
-              </select>
-            </div>
-            {companyType === "" &&
-            (activeCard === "both" || activeCard === "producer") ? (
-              <div style={{ color: "red" }}>
-                Please select your publisher company type.
-              </div>
-            ) : null}
+            Publisher Company Type
           </div>
-        ) : null}
+          <div
+            style={{
+              fontSize: "16px",
+              marginBottom: "16px",
+            }}
+          >
+            Please select the federal tax classification of your publisher
+            company.
+          </div>
 
-        <div
-          style={{
-            fontSize: "14px",
-            paddingLeft: "20px",
-            paddingRight: "20px",
-            boxSizing: "border-box",
-          }}
-        >
-          ASCAP uses TINCheck and SmartyStreets to verify certain information
-          provided by you in connection with your application. Any information
-          processed by TINCheck and SmartyStreets shall be subject to the
-          privacy policies of{" "}
-          <a
-            style={{ textDecoration: "none", color: "#1178CE" }}
-            href="https://www.tincheck.com/pages/tincheck-agreement"
-            target="_blank"
-            rel="noreferrer"
-          >
-            TINCheck
-          </a>{" "}
-          and{" "}
-          <a
-            style={{ textDecoration: "none", color: "#1178CE" }}
-            href="https://www.smarty.com/legal/privacy-policy"
-            target="_blank"
-            rel="noreferrer"
-          >
-            SmartyStreets
-          </a>
-          .
+          <div>
+            <select
+              type="number"
+              name="ticketsSelected"
+              required
+              value={companyType}
+              className={classes.SelectionBox}
+              style={selectError ? { border: "1px solid red" } : null}
+              onChange={(event) => {
+                setCompanyType(event.target.value);
+                setSelectError(false);
+              }}
+            >
+              <option value="none" selected disabled hidden>
+                Select an Option
+              </option>
+              {companyTypes.map((opt, index) => (
+                <option key={index} value={opt.value}>
+                  {opt.text}
+                </option>
+              ))}
+            </select>
+          </div>
+          {selectError ? (
+            <div style={{ color: "red" }}>
+              Please select your publisher company type.
+            </div>
+          ) : null}
         </div>
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "190px 190px",
-            paddingTop: "20px",
-            paddingLeft: "20px",
-            boxSizing: "border-box",
-          }}
-        >
+      );
+    }
+  };
+
+  const detailText = (
+    <div
+      style={{
+        fontSize: "14px",
+        paddingLeft: "20px",
+        paddingRight: "20px",
+        boxSizing: "border-box",
+      }}
+    >
+      ASCAP uses TINCheck and SmartyStreets to verify certain information
+      provided by you in connection with your application. Any information
+      processed by TINCheck and SmartyStreets shall be subject to the privacy
+      policies of{" "}
+      <a
+        className={classes.HyperLinkText}
+        href="https://www.tincheck.com/pages/tincheck-agreement"
+        target="_blank"
+        rel="noreferrer"
+      >
+        TINCheck
+      </a>{" "}
+      and{" "}
+      <a
+        className={classes.HyperLinkText}
+        href="https://www.smarty.com/legal/privacy-policy"
+        target="_blank"
+        rel="noreferrer"
+      >
+        SmartyStreets
+      </a>
+      .
+    </div>
+  );
+
+  const buttonSection = () => {
+    if (screenSize > 575) {
+      return (
+        <div className={classes.ButtonRow}>
           <div style={{ paddingRight: "10px" }}>
-            <button style={{ width: "180px", height: "40px" }}>CANCEL</button>
+            <button
+              className={classes.ButtonGrey}
+              style={{ width: "180px", height: "40px" }}
+              onClick={() => {
+                window.location.href = "https://www.ascap.com/";
+              }}
+            >
+              CANCEL
+            </button>
           </div>
           <button
+            className={classes.ButtonBlue}
             style={{
               width: "180px",
               height: "40px",
-              color: "#fff",
-              backgroundColor: "#1178CE",
-              padding: "10px 20px 9px",
             }}
             onClick={() => {
-              console.log("clicked");
               if (activeCard === "") {
-                console.log("about to change");
                 setActiveCard("error");
+              }
+
+              if (companyType === "none") {
+                setSelectError(true);
+              }
+
+              if (
+                ((activeCard === "both" || activeCard === "producer") &&
+                  companyType !== "none") ||
+                activeCard === "writer"
+              ) {
+                setShowSuccessModal(true);
               }
             }}
           >
             CONTINUE
           </button>
+        </div>
+      );
+    } else {
+      return (
+        <div style={{ paddingTop: "20px" }}>
+          <div style={{ paddingBottom: "20px", paddingLeft: "20px" }}>
+            <button
+              className={classes.ButtonGrey}
+              style={{
+                fontSize: "20px",
+                width: "calc(100vw - 60px)",
+                height: "40px",
+              }}
+              onClick={() => {
+                window.location.href = "https://www.ascap.com/";
+              }}
+            >
+              CANCEL
+            </button>
+          </div>
+          <div style={{ paddingBottom: "20px", paddingLeft: "20px" }}>
+            <button
+              className={classes.ButtonBlue}
+              style={{
+                fontSize: "20px",
+                width: "calc(100vw - 60px)",
+                height: "40px",
+              }}
+              onClick={() => {
+                if (activeCard === "") {
+                  setActiveCard("error");
+                }
+
+                if (companyType === "none") {
+                  setSelectError(true);
+                }
+
+                if (
+                  ((activeCard === "both" || activeCard === "producer") &&
+                    companyType !== "none") ||
+                  activeCard === "writer"
+                ) {
+                  setShowSuccessModal(true);
+                }
+              }}
+            >
+              CONTINUE
+            </button>
+          </div>
+        </div>
+      );
+    }
+  };
+
+  return (
+    <Fragment>
+      <div style={{ overflow: "hidden" }}>
+        <MinorAppModal
+          show={showMinorAppModal}
+          clicked={() => setShowMinorAppModal(false)}
+        />
+        <SuccessModal
+          show={showSuccessModal}
+          membership={activeCard}
+          company={companyType}
+          clicked={() => {
+            setActiveCard("");
+            setCompanyType("none");
+            setSelectError(false);
+            setShowSuccessModal(false);
+          }}
+        />
+        <Header />
+        <div className={classes.MainContainer}>
+          <div className={classes.SectionTitle}>Membership</div>
+          <div className={classes.SectionDescription}>
+            Select your membership type below:
+          </div>
+          <div className={classes.SubscriptionContainer}>
+            {subscriptions.map((sub, index) => {
+              return (
+                <Subscription
+                  key={index}
+                  subscription={sub}
+                  activeCard={activeCard}
+                  hoveredCard={hoveredCard}
+                  clicked={(tr) => {
+                    setActiveCard(tr);
+                    setSelectError(false);
+                    setCompanyType("none");
+                  }}
+                  hovered={(tr) => {
+                    setHoveredCard(tr);
+                  }}
+                />
+              );
+            })}
+          </div>
+          {membershipError()}
+          {underAge}
+          {companyTypeSelection()}
+          {detailText}
+          {buttonSection()}
         </div>
       </div>
     </Fragment>

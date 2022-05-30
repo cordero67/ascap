@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import classes from "./App.module.css";
+import classes from "./Header.module.css";
 
 const Header = () => {
   const openHelpCenter = () => {
@@ -9,13 +9,10 @@ const Header = () => {
   const [screenSize, setScreenSize] = useState(window.innerWidth);
 
   const stylingUpdate = (inWidth) => {
-    console.log("stylingUpdate in Header");
     setScreenSize(inWidth);
-    console.log("screenSize in Header: ", screenSize);
   };
 
   window.onresize = function (event) {
-    console.log("resized in Header");
     stylingUpdate(window.innerWidth);
   };
 
@@ -76,9 +73,3 @@ const Header = () => {
 };
 
 export default Header;
-/*
-
-      <div className={classes.HeaderMiddle}>Membership Application</div>
-
-
-      */

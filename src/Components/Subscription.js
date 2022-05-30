@@ -1,5 +1,5 @@
 import React from "react";
-import classes from "./App.module.css";
+import classes from "./Subscription.module.css";
 
 const Subscription = (props) => {
   //console.log("Subscription: ", props.subscription);
@@ -122,6 +122,7 @@ const Subscription = (props) => {
               {props.subscription.requirements.map((req, index) => {
                 return (
                   <li
+                    key={index}
                     style={{
                       display: "grid",
                       gridTemplateColumns: "20px auto",

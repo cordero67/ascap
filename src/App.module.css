@@ -1,6 +1,6 @@
 .MainContainer {
   padding-top: 20px;
-  /*padding-left: calc((100vw - 480px)/2);*/
+  padding-bottom: 20px;
 }
 
 .SectionTitle {
@@ -20,138 +20,66 @@
   text-align: center;
 }
 
-.MembershipCard {
-  width: auto;
-  padding: 20px 20px 20px 20px;
-  margin: 0px 0px 10px;
-  color: #6D6D6D;
-  cursor: pointer;
-  box-sizing: border-box;
-}
-
-.CardTitle {
-  border-top: 1px solid grey;
-  border-left: 1px solid grey;
-  border-right: 1px solid grey;
-  background-color: #FAFAFA;
-  color: #85868C;
-  font-size: 16px;
-  font-weight: 600;
-  text-align: center;
-  padding: 24px;
-  box-sizing: border-box;
-}
-
-.CardBody {
-  border: 1px solid grey;
+.JoinASCAP {
   font-size: 14px;
-  padding: 24px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 20px;
+}
+
+.SelectionBox {
+  font-size: 18px;
+  width: calc(100vw - 60px);
+  height: 40px;
+  padding-left: 10px;
   box-sizing: border-box;
 }
 
-.CardDescription {
-  text-align: left;
-  margin: 0px 0px 16px;
-}
-
-.CardApplicationFee {
-  text-align: left;
-  margin: 0px 0px 16px;
-  box-sizing: border-box;
-}
-
-.CardApplicationFeeTitle {
-  font-weight: 700;
-}
-
-.CardApplicationFeeRefund {
-  font-size: 14px;
-  color: #6D6D6D;
-}
-
-.CardItemsTitle {
-  text-align: left;
-  font-weight: 700;
-  margin: 0px 0px 16px;
-}
-
-.List {
-  text-align: left;
-  padding-left: 0px; 
-}
-
-.Button {
-  font-size: 10px;
-  font-weight: 600;
-  color: #2f5596;
-  border: none;
-  background-color: #fff;
-  cursor: pointer;
-  display: inline-block;
+.ButtonBlue {
+  background-color: #0C5997;
+  color: #fff;
+  border: 1px solid black;
   outline: none;
-  padding: 0px 3px 0px 3px;
-  box-sizing: border-box;
+  cursor: pointer;
 }
 
-.Header {
-  display: grid;
-  grid-template-columns: 90px auto 90px;
-  background-color: #1178CE;
-  height: 70px;
-  box-sizing: border-box;
+.ButtonBlue:hover {
+  background-color: #1285E2;
+}
+.ButtonBlue:active {
+  background-color: #1285E2;
+  border: 2px solid black;
 }
 
-.HeaderLeft {
-  margin: 10px 30px;
-  box-sizing: border-box;
+.ButtonGrey {
+  background-color: #fff;
+  color: #000;
+  border: 1px solid black;
+  outline: none;
+  cursor: pointer;
+}
+.ButtonGrey:hover {
+  background-color: #ececec;
+}
+.ButtonGrey:active {
+  background-color: #cccccc;
+  border: 2px solid black;
 }
 
-.HeaderMiddle {
-  height: 50px;
-  margin: 8px 0px;
-  font-size: 20px;
-  font-weight: 700;
-  text-align: center;
-  color: #fff;
-  box-sizing: border-box;
-}
-
-.HeaderRight {
-  text-align: center;
-  margin: 15px 0px 10px;
-  box-sizing: border-box;
-}
-
-.HeaderButton {
-  border: 2px solid #fff;
-  width: 210px;
-  height: 40px;
+.HyperLinkText {
+  text-decoration: none;
+  color: #0066CC;
   font-size: 16px;
-  font-weight: 600;
-  background-color: #1178CE;
-  color: #fff;
+  text-align: left;
+  margin: 0px 0px 16px;
 }
 
-.HeaderButton:hover {
-  background-color: #fff;
-  color: #1178CE;
+.HyperLinkText:hover {
+  text-decoration: underline;
 }
 
-.HeaderQuestion {
-  border: 2px solid #fff;
-  width: 40px;
-  height: 40px;
-  font-size: 20px;
-  font-weight: 600;
-  border-radius: 50%;
-  background-color: #1178CE;
-  color: #fff;
-}
-
-.HeaderQuestion:hover {
-  border: 2px solid #1178CE;
-  background-color: #fff;
-  color: #1178CE;
+.HyperLinkText:active {
+  color: #0C5997;
 }
 
 .ErrorText {
@@ -162,11 +90,32 @@
   padding-bottom: 20px;
 }
 
-@media (min-width: 435px) {
-  .HeaderMiddle {
-    margin: 20px 0px;
-  }
+.BlueText {
+  color: #0066CC;
+  border: none;
+  outline: none;
+  text-align: left;
+  font-size: 14px;
+  padding-left: 0px;
+  background-color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  box-sizing: border-box;
+}
 
+.BlueText:hover {
+  color: #0066CC;
+  border: none;
+  outline: none;
+  text-decoration: underline;
+  box-sizing: border-box;
+}
+
+.BlueText:active {
+  color: #0C5997;
+}
+
+@media (min-width: 435px) {
   .SectionTitle {
     font-size: 24px;
   }
@@ -176,30 +125,27 @@
   }}
 
 @media (min-width: 575px) {
-  .HeaderMiddle {
-    margin-top: 15px;
-    font-size: 28px;
-  }
-
   .MainContainer {
     padding-left: calc((100vw - 480px)/2);
     padding-right: calc((100vw - 480px)/2);
   }
-  
-  .MembershipCard {
-    width: 480px;
-  }
 
-  .CardTitle {
+  .SelectionBox {
     font-size: 20px;
-  }
-  
-  .CardBody {
-    font-size: 16px;
+    width: 440px;
   }
 
   .ErrorText {
-    font-size: 16px
+    font-size: 16px;
+  }
+  
+  .ButtonRow {
+    display: grid;
+    grid-template-columns: 180px 180px;
+    grid-column-gap: 30px;
+    padding-top: 20px;
+    padding-left: 45px;
+    box-sizing: border-box;
   }
 }
 
@@ -208,42 +154,22 @@
     padding-left: calc((100vw - 660px)/2);
     padding-right: calc((100vw - 660px)/2);
   }
-  
-  .MembershipCard {
-    width: 660px;
-  }
-}
 
-@media (min-width: 870px) {
-  .Header {
+  .ButtonRow {
     display: grid;
-    grid-template-columns: 240px auto 280px;
-    height: 140px;
+    grid-template-columns: 180px 180px;
+    grid-column-gap: 30px;
+    padding-top: 20px;
+    padding-left: 115px;
+    box-sizing: border-box;
   }
-
-  .HeaderLeft {
-    margin: 35px;
-  }
-
-  .HeaderMiddle {
-    margin-top: 50px;
-  }
-
-  .HeaderRight {
-    margin: 50px 0px;
-  }
-
-  .QuestionIcon {
-    width: 40px;
-    font-size: 40px;
-    color: lightblue;
-    padding-top: 5px;
+  
+  .SelectionBox {
+    width: 620px;
   }
 }
 
 @media (min-width: 992px) {
-  
-
   .MainContainer {
     padding-left: calc((100vw - 900px)/2);
     padding-right: calc((100vw - 900px)/2);
@@ -254,9 +180,18 @@
     grid-template-columns: 300px 300px 300px;
     text-align: center;
   }
+
+  .ButtonRow {
+    display: grid;
+    grid-template-columns: 180px 180px;
+    grid-column-gap: 30px;
+    padding-top: 20px;
+    padding-left: 20px;
+    box-sizing: border-box;
+  }
   
-  .MembershipCard {
-    width: 300px;
+  .SelectionBox {
+    width: 560px;
   }
 }
 
@@ -272,7 +207,7 @@
     text-align: center;
   }
 
-  .MembershipCard {
-    width: 360px;
+  .SelectionBox {
+    width: 680px;
   }
 }
